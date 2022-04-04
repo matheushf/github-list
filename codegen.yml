@@ -1,0 +1,33 @@
+overwrite: true
+schema:
+  - https://api.github.com/graphql:
+      headers:
+        Authorization: bearer YOUR_TOKEN_HERE
+documents: 'src/**/*.gql'
+config:
+  namingConvention:
+    enumValues: keep
+  scalars:
+    DateTime: Date
+    Date: Date
+    Time: Date
+generates:
+  src/services/apollo-client/types.tsx:
+    plugins:
+      - add:
+          content: '/* eslint-disable */'
+      - 'typescript'
+      - 'typescript-react-apollo'
+      - 'typescript-operations'
+      - 'fragment-matcher'
+    config:
+      typesPrefix: GraphQL
+      avoidOptionals: true
+      immutableTypes: true
+      withComponent: false
+      withHOC: false
+      withHooks: true
+
+  src/services/apollo-client/schema.json:
+    plugins:
+      - 'introspection'
