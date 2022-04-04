@@ -23500,6 +23500,9 @@ export const FetchReposDocument = gql`
         name: nameWithOwner
         stars: stargazerCount
         forks: forkCount
+        url
+        id
+        __typename
       }
     }
     pageInfo {
@@ -23549,7 +23552,8 @@ export type GraphQLFetchReposQuery = (
     { readonly __typename?: 'SearchResultItemConnection' }
     & Pick<GraphQLSearchResultItemConnection, 'repositoryCount'>
     & { readonly nodes: Maybe<ReadonlyArray<Maybe<{ readonly __typename?: 'App' } | { readonly __typename?: 'Discussion' } | { readonly __typename?: 'Issue' } | { readonly __typename?: 'MarketplaceListing' } | { readonly __typename?: 'Organization' } | { readonly __typename?: 'PullRequest' } | (
-      { readonly __typename?: 'Repository' }
+      { readonly __typename: 'Repository' }
+      & Pick<GraphQLRepository, 'url' | 'id'>
       & { name: GraphQLRepository['nameWithOwner'], stars: GraphQLRepository['stargazerCount'], forks: GraphQLRepository['forkCount'] }
     ) | { readonly __typename?: 'User' }>>>, readonly pageInfo: (
       { readonly __typename?: 'PageInfo' }

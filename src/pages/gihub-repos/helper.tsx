@@ -1,12 +1,12 @@
 import React from 'react';
 import { StarOutlined, ForkOutlined } from '@ant-design/icons';
+import { GraphQLFetchReposQuery } from 'services/apollo-client/types';
 
 export const REPO_TABLE_COLUMNS = [
   {
     title: 'Name',
     dataIndex: 'name',
     key: 'name',
-    render: (text: string) => <span>{text}</span>,
   },
   {
     title: 'Stars',
@@ -31,3 +31,22 @@ export const REPO_TABLE_COLUMNS = [
     ),
   },
 ];
+
+function getRepoNameText(repo: { url: string; name: string }): JSX.Element {
+  return (
+    <a href={repo.url} target="_blank" rel="noreferrer">
+      {repo.name}
+    </a>
+  );
+}
+
+export function mapRepos(
+  repos?: GraphQLFetchReposQuery,
+): { [key: string]: string | JSX.Element | number }[] {
+  return (
+    repos?.search?.nodes?.map((repo) => ({
+      ...repo,
+      name: getRepoNameText(repo as any),
+    })) ?? []
+  );
+}

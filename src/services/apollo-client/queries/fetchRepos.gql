@@ -6,6 +6,8 @@ query FetchRepos($pageSize: Int!, $after: String, $before: String) {
         name: nameWithOwner
         stars: stargazerCount
         forks: forkCount
+        url
+        id
         __typename
       }
     }
