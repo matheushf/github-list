@@ -14,6 +14,7 @@ const mockedSchema = addMocksToSchema({
   mocks: {
     Int: () => faker.datatype.number({ min: 0, max: 100 }),
     Float: () => faker.datatype.float({ min: 0, max: 100 }),
+    URI: () => 'url',
     SearchResultItemConnection: () => ({
       nodes: [
         ...[...Array(10)].map(() => ({
